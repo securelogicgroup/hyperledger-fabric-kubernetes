@@ -11,22 +11,6 @@ OrdererOrgs:
           - orderer0-network-c1
           - orderer0-network-c1.network-c1.svc.cluster.local
           - orderer0.network.c1
-      - Hostname: orderer1
-        SANS:
-          - localhost
-          - 127.0.0.1
-          - ::1
-          - orderer1-network-c1
-          - orderer1-network-c1.network-c1.svc.cluster.local
-          - orderer1.network.c1
-      - Hostname: orderer2
-        SANS:
-          - localhost
-          - 127.0.0.1
-          - ::1
-          - orderer2-network-c1
-          - orderer2-network-c1.network-c1.svc.cluster.local
-          - orderer2.network.c1
 PeerOrgs:
   - Name: Org1
     Domain: org1.network.c1

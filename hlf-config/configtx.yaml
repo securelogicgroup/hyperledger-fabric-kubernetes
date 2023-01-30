@@ -47,8 +47,6 @@ Organizations:
         # and peers may to connect to to push transactions and receive blocks respectively.
         OrdererEndpoints:
             - orderer0-network-c1:7050
-            - orderer1-network-c1:7050
-            - orderer2-network-c1:7050
 
     - &Org1
         Name: Org1MSP
@@ -287,14 +285,6 @@ Orderer: &OrdererDefaults
         Port: 7050
         ClientTLSCert: crypto-config/ordererOrganizations/network.c1/orderers/orderer0.network.c1/tls/server.crt
         ServerTLSCert: crypto-config/ordererOrganizations/network.c1/orderers/orderer0.network.c1/tls/server.crt
-      - Host: orderer1-network-c1
-        Port: 7050
-        ClientTLSCert: crypto-config/ordererOrganizations/network.c1/orderers/orderer1.network.c1/tls/server.crt
-        ServerTLSCert: crypto-config/ordererOrganizations/network.c1/orderers/orderer1.network.c1/tls/server.crt
-      - Host: orderer2-network-c1
-        Port: 7050
-        ClientTLSCert: crypto-config/ordererOrganizations/network.c1/orderers/orderer2.network.c1/tls/server.crt
-        ServerTLSCert: crypto-config/ordererOrganizations/network.c1/orderers/orderer2.network.c1/tls/server.crt
 
       # Options to be specified for all the etcd/raft nodes. The values here
       # are the defaults for all new channels and can be modified on a

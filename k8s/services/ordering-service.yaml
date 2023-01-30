@@ -17,46 +17,7 @@ spec:
     port: 8443
     protocol: TCP
     targetPort: 8443
----
 
-apiVersion: v1
-kind: Service
-metadata:
-  name: orderer1-network-c1
-  namespace: network-c1
-spec:
-  type: ClusterIP
-  selector:
-    component: "orderer1.network.c1"
-  ports:
-  - name: "listen"
-    port: 7050
-    protocol: TCP
-    targetPort: 7050
-  - name: "operations"
-    port: 8443
-    protocol: TCP
-    targetPort: 8443
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: orderer2-network-c1
-  namespace: network-c1
-spec:
-  type: ClusterIP
-  selector:
-    component: "orderer2.network.c1"
-  ports:
-  - name: "listen"
-    port: 7050
-    protocol: TCP
-    targetPort: 7050
-  - name: "operations"
-    port: 8443
-    protocol: TCP
-    targetPort: 8443
 ---
 
 apiVersion: v1
