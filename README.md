@@ -22,9 +22,7 @@ The source code herein is not production ready. It demonstrates what are the bui
 ❯ watch -n 1 kubectl get -n network-c1 pods,ingress,secrets,svc,pvc,pv
 ```
 
-Now, we are going to operate the peer of Org1 and the peer of Org2 in order to create and join a channel as well as install the chaincode.
-
-You'll need two different terminals and run the following commands:
+Now, we are going to operate the peer of Org1 in order to create and join a channel as well as install the chaincode.
 
 - Terminal 1: CLI configured for the peer of Org1
 
@@ -34,17 +32,6 @@ You'll need two different terminals and run the following commands:
 
 ❯ cd artifacts
 ❯ peer channel create -c $CHANNEL_NAME -f ./channelall.tx -o orderer0-network-c1:7050 --tls --cafile $ORDERER_CA
-❯ peer channel join -b ./channelall.block
-❯ cd -
-```
-
-- Terminal 2: CLI configured for the peer of Org2
-
-```bash
-# connect to the pod running the CLI for peer0.org2
-❯ kubectl exec -it -n network-c1 $(kubectl get pod -n network-c1 -l component=cli.peer0.org2.network.c1 -o jsonpath="{.items[0].metadata.name}") -- bash
-
-❯ cd artifacts
 ❯ peer channel join -b ./channelall.block
 ❯ cd -
 ```
@@ -71,7 +58,7 @@ We can now proceed to install the chaincode.
 ❯ peer lifecycle chaincode approveformyorg  -o orderer0-network-c1:7050 --tls --cafile $ORDERER_CA --channelID $CHANNEL_NAME --name chaincode-as-external-service --version 1.0 --init-required --package-id chaincode-as-external-service:33b295bb4ac3f8dead7bddb9e86315aa7b3729b76d6d53f9379ddba6db900f7f --sequence 1
 ```
 
-We are almost done, chaincode has been approved by both Org1 and Org2, we can now commit the chaincode before invoking it.
+We are almost done, chaincode has been approved by Org1, we can now commit the chaincode before invoking it.
 
 - Terminal 1: CLI configured for the peer of Org1
 
@@ -82,12 +69,9 @@ We are almost done, chaincode has been approved by both Org1 and Org2, we can no
 # It should output something like:
 # Chaincode definition for chaincode 'chaincode-as-external-service', version '1.0', sequence '1' on channel 'channelall' approval status by org:
 # Org1MSP: true
-# Org2MSP: true
-# Org3MSP: false
-
 
 # commit the chaincode
-❯ peer lifecycle chaincode commit -o orderer0-network-c1:7050 --channelID $CHANNEL_NAME --name chaincode-as-external-service --version 1.0 --sequence 1 --init-required --tls --cafile $ORDERER_CA --peerAddresses peer0-org1-network-c1:7051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE  --peerAddresses peer0-org2-network-c1:7051 --tlsRootCertFiles /etc/hyperledger/fabric/crypto/peerOrganizations/org2.network.c1/peers/peer0.org2.network.c1/tls/ca.crt
+❯ peer lifecycle chaincode commit -o orderer0-network-c1:7050 --channelID $CHANNEL_NAME --name chaincode-as-external-service --version 1.0 --sequence 1 --init-required --tls --cafile $ORDERER_CA --peerAddresses peer0-org1-network-c1:7051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE
 ```
 
 That's it ! The chaincode is ready to be invoked :smile:.
@@ -96,12 +80,8 @@ That's it ! The chaincode is ready to be invoked :smile:.
 
 ```bash
 # init and invoke the chaincode
-❯ peer chaincode invoke -o orderer0-network-c1:7050 --tls --cafile $ORDERER_CA -C $CHANNEL_NAME -n chaincode-as-external-service  --peerAddresses peer0-org1-network-c1:7051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE  --peerAddresses peer0-org2-network-c1:7051 --tlsRootCertFiles /etc/hyperledger/fabric/crypto/peerOrganizations/org2.network.c1/peers/peer0.org2.network.c1/tls/ca.crt --isInit -c '{"function":"Init","Args":[]}'
-```
+❯ peer chaincode invoke -o orderer0-network-c1:7050 --tls --cafile $ORDERER_CA -C $CHANNEL_NAME -n chaincode-as-external-service  --peerAddresses peer0-org1-network-c1:7051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE --isInit -c '{"function":"Init","Args":[]}'
 
-- Terminal 2: CLI configured for the peer of Org2
-
-```bash
 # query the chaincode
 ❯ peer chaincode query -C $CHANNEL_NAME -n chaincode-as-external-service -c '{"Args":["Query", "default-asset"]}'
 ```
