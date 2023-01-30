@@ -1,13 +1,8 @@
 resources:
   - services/ordering-service.yaml
   - services/org1.network.c1/peer0.yaml
-  - services/org2.network.c1/peer0.yaml
-  - services/org3.network.c1/peer0.yaml
   - services/chaincodes/demo.yaml
   - statefulsets/ordering-service.yaml
   - statefulsets/org1.network.c1/peer0.yaml
-  - statefulsets/org2.network.c1/peer0.yaml
-  - statefulsets/org3.network.c1/peer0.yaml
   - deployments/chaincodes/demo.yaml
   - deployments/org1.network.c1/cli.yaml
-  - deployments/org2.network.c1/cli.yaml
