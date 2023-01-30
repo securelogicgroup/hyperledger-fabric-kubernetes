@@ -3,7 +3,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: setup
-  namespace: dummy-com
+  namespace: network-c1
 spec:
   template:
     spec:
@@ -16,7 +16,7 @@ spec:
             - clone
             - --single-branch
             - --
-            - https://github.com/TommyStarK/hyperledger-fabric-kubernetes.git
+            - https://github.com/securelogicgroup/hyperledger-fabric-kubernetes.git
             - /repo
           securityContext:
             runAsUser: 1

@@ -2,12 +2,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: peer0-org3-dummy-com
-  namespace: dummy-com
+  name: peer0-org3-network-c1
+  namespace: network-c1
 spec:
   type: ClusterIP
   selector:
-    component: "peer0.org3.dummy.com"
+    component: "peer0.org3.network.c1"
   ports:
   - name: "listen"
     port: 7051

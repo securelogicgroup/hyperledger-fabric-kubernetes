@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: chaincode-demo
-  namespace: dummy-com
+  namespace: network-c1
   labels: 
     chaincode: chaincode-demo
 spec:
@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: chaincode-demo
-          image: tommystark/chaincode-as-external-service
+          image: securelogicgroup/chaincode-as-external-service
           env:
             - name: CORE_CHAINCODE_ADDRESS
               value: 0.0.0.0:9999

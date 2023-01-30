@@ -1,4 +1,4 @@
-module github.com/TommyStarK/hyperledger-fabric-kubernetes/chaincode-as-external-service
+module github.com/securelogicgroup/hyperledger-fabric-kubernetes/chaincode-as-external-service
 
 go 1.15
 
