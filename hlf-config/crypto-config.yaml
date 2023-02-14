@@ -16,7 +16,7 @@ PeerOrgs:
     Domain: org1.network.c1
     EnableNodeOUs: true
     Template:
-      Count: 1
+      Count: 3
       SANS:
         - localhost
         - 127.0.0.1
