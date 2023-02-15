@@ -24,5 +24,6 @@ PeerOrgs:
         - "{{.Hostname}}-org1-network-c1"
         - "{{.Hostname}}-org1-network-c1.network-c1.svc.cluster.local"
         - "{{.Hostname}}.org1.network.c1"
+        - "peers-org1-network-c1"
     Users:
       Count: 1
